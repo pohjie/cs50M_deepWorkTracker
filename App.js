@@ -4,18 +4,10 @@ import { StyleSheet, Text, View } from 'react-native';
 
 import HomeScreen from './screens/HomeScreen';
 import LoggedScreen from './screens/LoggedScreen';
+import RecordScreen from './screens/RecordScreen';
 
 export default function App() {
   return (
-    <LoggedScreen />
+    <RecordScreen />
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
