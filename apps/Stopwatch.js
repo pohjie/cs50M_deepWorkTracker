@@ -5,8 +5,8 @@ export default class StopWatch extends React.Component {
   state = {
     timer: null,
     hours: '00',
+    mins: '00',
     secs: '00',
-    msecs: '00',
     running: false,
   }
 
@@ -24,25 +24,25 @@ export default class StopWatch extends React.Component {
   start = () => {
     var self = this
     let timer = setInterval(() => {
-      var newMsecs = (Number(this.state.msecs) + 1).toString()
-      var newSecs = this.state.secs
+      var newSecs = (Number(this.state.secs) + 1).toString()
+      var newMins = this.state.mins
 
-      if (Number(this.state.msecs) == 99) {
-        newSecs = (Number(this.state.secs) + 1).toString()
-        newMsecs = '00'
+      if (Number(this.state.secs) == 59) {
+        newMins = (Number(this.state.mins) + 1).toString()
+        newSecs = '00'
       }
 
       var newHours = this.state.hours
-      if (Number(this.state.secs) == 59 && Number(this.state.msecs) == 99) {
+      if (Number(this.state.mins) == 59 && Number(this.state.secs) == 59) {
         newHours = (Number(this.state.hours) + 1).toString()
-        newSecs = '00'
+        newMins = '00'
       }
       self.setState({
         hours: newHours.length == 1 ? '0' + newHours : newHours,
-        secs: newSecs.length == 1 ? '0' + newSecs : newSecs,
-        msecs: newMsecs.length == 1 ? '0' + newMsecs : newMsecs
+        mins: newMins.length == 1 ? '0' + newMins : newMins,
+        secs: newSecs.length == 1 ? '0' + newSecs : newSecs
       })
-    }, 0)
+    }, 1000)
 
     this.setState({ timer })
   }
@@ -61,8 +61,8 @@ export default class StopWatch extends React.Component {
     this.setState({
       timer: null,
       hours: '00',
+      mins: '00',
       secs: '00',
-      msecs: '00',
     })
   }
 
@@ -72,9 +72,9 @@ export default class StopWatch extends React.Component {
         <View style={styles.row}>
           <Text style={styles.title}>{this.state.hours}</Text>
           <Text style={styles.title}>:</Text>
-          <Text style={styles.title}>{this.state.secs}</Text>
+          <Text style={styles.title}>{this.state.mins}</Text>
           <Text style={styles.title}>:</Text>
-          <Text style={styles.title}>{this.state.msecs}</Text>
+          <Text style={styles.title}>{this.state.secs}</Text>
         </View>
         <View style={styles.row}>
           <Button title="Start" 
