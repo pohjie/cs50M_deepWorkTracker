@@ -5,9 +5,10 @@ import { StyleSheet, Text, View } from 'react-native';
 import HomeScreen from './screens/HomeScreen';
 import LoggedScreen from './screens/LoggedScreen';
 import RecordScreen from './screens/RecordScreen';
+import MotivationScreen from './screens/MotivationScreen';
 
 export default function App() {
   return (
-    <RecordScreen />
+    <MotivationScreen />
   );
 }
