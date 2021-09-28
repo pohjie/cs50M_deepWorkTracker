@@ -10,7 +10,7 @@ const Tab = createBottomTabNavigator();
 const BottomTabNavigator = () => {
   return (
     <Tab.Navigator>
-      <Tab.Screen name="Deep Work Tracker" component={MainStackNavigator} />
+      <Tab.Screen name="Timer" component={MainStackNavigator} />
       <Tab.Screen name="Record" component={RecordScreen} />
       <Tab.Screen name="Motivation" component={MotivationScreen} />
     </Tab.Navigator>

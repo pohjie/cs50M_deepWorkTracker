@@ -87,6 +87,11 @@ export default class StopWatch extends React.Component {
                   onPress={this.onButtonReset}
                   accessibilityLabel="Reset button"></Button>
         </View>
+        <View style={styles.row}>
+          <Button title="Log"
+                  onPress={() => this.props.navigation.navigate("Logged")}
+                  accessibilityLabel="Log your deep work time"></Button>
+        </View>
       </View>
     )
   }

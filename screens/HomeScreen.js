@@ -7,7 +7,7 @@ export default class HomeScreen extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <StopWatch />
+        <StopWatch navigation={this.props.navigation}/>
       </View>
     )
   }
