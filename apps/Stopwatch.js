@@ -1,6 +1,8 @@
 import React from 'react'
 import { StyleSheet, View, Text, Button } from 'react-native'
 
+import store from '../redux/store'
+
 export default class StopWatch extends React.Component {
   state = {
     timer: null,

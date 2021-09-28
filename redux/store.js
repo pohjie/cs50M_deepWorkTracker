@@ -1,7 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
+import { timeReducer } from "./reducer";
 
-export default configureStore({
-  reducer: {
-    reducer: timerReducer, 
-  }
-})
+const store = configureStore({ reducer: timeReducer })
+
+export default store

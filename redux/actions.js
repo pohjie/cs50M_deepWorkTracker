@@ -1,10 +1,10 @@
 // action types
-export const UPDATE_TIMER = 'UPDATE_TIMER'
+export const UPDATE_TIME = 'UPDATE_TIME'
 
 // action creators
-export const updateTimer = timer => {
+export const updateTime = timer => {
   return {
-    type: UPDATE_TIMER,
+    type: UPDATE_TIME,
     payload: timer,
   }
 }
