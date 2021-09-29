@@ -2,6 +2,7 @@ import React from 'react'
 import { StyleSheet, View, Text, Button } from 'react-native'
 
 import store from '../redux/store'
+import { addSession } from '../redux/actions'
 
 export default class StopWatch extends React.Component {
   state = {
@@ -14,9 +15,6 @@ export default class StopWatch extends React.Component {
 
   constructor(props) {
     super(props)
-  }
-
-  componentDidMount() {
   }
 
   componentWillUnmount() {
@@ -60,6 +58,7 @@ export default class StopWatch extends React.Component {
   }
 
   onButtonReset = () => {
+    this.onButtonStop()
     this.setState({
       timer: null,
       hours: '00',
@@ -91,7 +90,14 @@ export default class StopWatch extends React.Component {
         </View>
         <View style={styles.row}>
           <Button title="Log"
-                  onPress={() => this.props.navigation.navigate("Logged")}
+                  onPress={() => {
+                    const hours = this.state.hours
+                    const mins = this.state.mins
+                    this.onButtonReset
+                    store.dispatch(addSession(Number(hours) * 60 + Number(mins)))
+                    this.props.navigation.navigate("Logged",
+                                                    {hours: hours,
+                                                    mins: mins})}}
                   accessibilityLabel="Log your deep work time"></Button>
         </View>
       </View>

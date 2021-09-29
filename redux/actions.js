@@ -1,10 +1,10 @@
 // action types
-export const UPDATE_TIME = 'UPDATE_TIME'
+export const ADD_SESSION = 'ADD_SESSION'
 
 // action creators
-export const updateTime = timer => {
+export const addSession = (mins) => {
   return {
-    type: UPDATE_TIME,
-    payload: timer,
+    type: ADD_SESSION,
+    payload: mins,
   }
 }

@@ -1,7 +1,9 @@
 import React from 'react'
 import { StyleSheet, View, Dimensions, Text } from 'react-native'
-import { Picker } from '@react-native-picker/picker';
 import { LineChart, ProgressChart } from 'react-native-chart-kit'
+
+import store from '../redux/store'
+import { retrieveDay, retrieveGoal } from '../redux/selectors'
 
 // prevRecord
 const prevRecord = {
@@ -9,7 +11,7 @@ const prevRecord = {
   datasets: [
     {
       data: [2, 4.5, 2.8, 5, 3.3, 4.3],
-      color: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`, // optional
+      color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`, // optional
       strokeWidth: 2 // optional
     }
   ],
@@ -27,7 +29,9 @@ const screenWidth = Dimensions.get("window").width
 // progressRing
 const progress = {
   labels: ['Today', 'Week', 'Month'],
-  data: [0.6, 0.21, 0.07],
+  data: [retrieveDay(store.getState()) / retrieveGoal(store.getState()),
+         0.21, 
+         0.07],
 }
 
 export default class RecordScreen extends React.Component {
@@ -38,16 +42,6 @@ export default class RecordScreen extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        {/* <Picker
-          selectedValue={this.state.selectedDuration}
-          style={styles.picker}
-          onValueChange={(itemValue, itemIndex) => this.setState({ selectedDuration: itemValue })}
-        >
-          <Picker.Item label="Daily" value="daily" />
-          <Picker.Item label="Weekly" value="weekly" />
-          <Picker.Item label="Monthly" value="monthly" />
-        </Picker> */}
-
         <LineChart
           data={prevRecord}
           width={screenWidth}
