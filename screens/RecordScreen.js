@@ -3,6 +3,7 @@ import { StyleSheet, View, Dimensions, Text } from 'react-native'
 import { LineChart, ProgressChart } from 'react-native-chart-kit'
 
 import store from '../redux/store'
+import { connect } from 'react-redux'
 import { retrieveDay, retrieveGoal } from '../redux/selectors'
 
 // prevRecord
@@ -27,16 +28,21 @@ const chartConfig = {
 const screenWidth = Dimensions.get("window").width
 
 // progressRing
-const progress = {
-  labels: ['Today', 'Week', 'Month'],
-  data: [retrieveDay(store.getState()) / retrieveGoal(store.getState()),
-         0.21, 
-         0.07],
-}
+// const progress = {
+//   labels: ['Today', 'Week', 'Month'],
+//   data: [this.props.day / this.props.goal,
+//          0.21, 
+//          0.07],
+// }
 
-export default class RecordScreen extends React.Component {
+class RecordScreen extends React.Component {
   state = {
-    selectedDuration: 'daily',
+    progress: {
+      labels: ['Today', 'Week', 'Month'],
+      data: [this.props.day / this.props.goal,
+             0.21, 
+             0.07],
+    },
   }
 
   render() {
@@ -50,7 +56,7 @@ export default class RecordScreen extends React.Component {
         />
 
         <ProgressChart
-          data={progress}
+          data={this.state.progress}
           width={screenWidth}
           height={220}
           strokeWidth={16}
@@ -79,3 +85,9 @@ const styles = StyleSheet.create({
     width: 150,
   },
 })
+
+const MapStateToProps = state => ({
+  day: state.day,
+  goal: state.goal,
+})
+export default connect(MapStateToProps)(RecordScreen)

@@ -1,6 +1,6 @@
 import { ADD_SESSION } from "./actions";
 
-const initialState = { day: 70, goal: 120, past: 0 }
+const initialState = { day: 0, goal: 120, past: 0 }
 
 function timeReducer(state = initialState, action) {
   if (action.type === ADD_SESSION) {

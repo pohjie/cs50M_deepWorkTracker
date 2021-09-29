@@ -1,10 +1,10 @@
 import React from 'react'
 import { StyleSheet, View, Text, Button } from 'react-native'
 
-import store from '../redux/store'
+import { connect } from 'react-redux'
 import { addSession } from '../redux/actions'
 
-export default class StopWatch extends React.Component {
+class StopWatch extends React.Component {
   state = {
     timer: null,
     hours: '00',
@@ -94,7 +94,7 @@ export default class StopWatch extends React.Component {
                     const hours = this.state.hours
                     const mins = this.state.mins
                     this.onButtonReset
-                    store.dispatch(addSession(Number(hours) * 60 + Number(mins)))
+                    this.props.addSession(Number(hours) * 60 + Number(mins))
                     this.props.navigation.navigate("Logged",
                                                     {hours: hours,
                                                     mins: mins})}}
@@ -122,3 +122,5 @@ const styles = StyleSheet.create({
     justifyContent: 'space-evenly',
   }
 })
+
+export default connect(null, {addSession: addSession})(StopWatch)

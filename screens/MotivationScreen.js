@@ -23,7 +23,7 @@ export default class MotivationScreen extends React.Component {
     return(
       <View style={styles.container}>
         <Text style={styles.text}>{this.state.quote}</Text>
-        <Text>- {this.state.author}</Text>
+        <Text>{this.state.author}</Text>
       </View>
     )
   }
