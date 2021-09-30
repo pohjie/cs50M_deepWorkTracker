@@ -1,18 +1,16 @@
 import React from 'react'
 import { StyleSheet, View, Text, Button } from 'react-native'
 
-import store from '../redux/store'
-import { retrieveDay, retrieveGoal } from '../redux/selectors'
+import { connect } from 'react-redux'
 
-export default class LoggedScreen extends React.Component {
+class LoggedScreen extends React.Component {
   render() {
-    const day = retrieveDay(store.getState())
-    const goal = retrieveGoal(store.getState())
+    const day = this.props.day
+    const goal = this.props.goal
 
     const hours = this.props.route.params.hours
     const mins = this.props.route.params.mins
 
-    console.log(store.getState())
     return (
       <View style={styles.container}>
         <Text style={styles.text}>
@@ -46,3 +44,9 @@ const styles = StyleSheet.create({
     marginBottom: 5,
   }
 })
+
+const MapStateToProps = state => ({
+  day: state.day,
+  goal: state.goal,
+})
+export default connect(MapStateToProps)(LoggedScreen)

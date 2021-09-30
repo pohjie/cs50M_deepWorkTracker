@@ -1,16 +1,20 @@
 import React from 'react';
+import { DefaultTheme, DarkTheme } from '@react-navigation/native';
 
 import { Provider } from 'react-redux'
-import store from './redux/store';
+import {store, persistor} from './redux/store';
+import { PersistGate } from 'redux-persist/integration/react'
 
 import { NavigationContainer } from '@react-navigation/native';
 import { BottomTabNavigator } from './stacks/MainTabNavigator';
 
 export default function App() {
   return (
-    <NavigationContainer>
+    <NavigationContainer theme={DarkTheme}>
       <Provider store={store}>
-        <BottomTabNavigator />
+        <PersistGate loading={null} persistor={persistor}>
+          <BottomTabNavigator />
+        </PersistGate>
       </Provider>
     </NavigationContainer>
   );

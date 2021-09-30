@@ -23,7 +23,7 @@ export default class MotivationScreen extends React.Component {
     return(
       <View style={styles.container}>
         <Text style={styles.text}>{this.state.quote}</Text>
-        <Text>{this.state.author}</Text>
+        <Text style={{color: 'white'}}>{this.state.author}</Text>
       </View>
     )
   }
@@ -37,6 +37,7 @@ const styles = StyleSheet.create({
     padding: 15,
   },
   text: {
+    color: 'white',
     textAlign: 'center',
     fontStyle: 'italic',
   }

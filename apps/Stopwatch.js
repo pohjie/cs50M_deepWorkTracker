@@ -112,6 +112,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   title: {
+    color: 'white',
     textAlign: 'center',
     fontSize: 48,
     fontVariant: ['tabular-nums'],

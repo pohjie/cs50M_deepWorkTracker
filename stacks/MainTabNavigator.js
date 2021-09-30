@@ -18,21 +18,21 @@ const BottomTabNavigator = () => {
                   component={MainStackNavigator}
                   options={{
                     tabBarIcon: () => (
-                      <Ionicons name="stopwatch" size={24} color="black"/>
+                      <Ionicons name="stopwatch" size={24} color="white"/>
                     )
                   }} />
       <Tab.Screen name="Record" 
                   component={RecordScreen} 
                   options={{
                     tabBarIcon: () => (
-                      <Entypo name="book" size={24} color="black" />
+                      <Entypo name="book" size={24} color="white" />
                     )
                   }}/>
       <Tab.Screen name="Motivation" 
                   component={MotivationScreen}
                   options={{
                     tabBarIcon: () => (
-                      <Foundation name="mountains" size={24} color="black" />
+                      <Foundation name="mountains" size={24} color="white" />
                     )
                   }} />
     </Tab.Navigator>
