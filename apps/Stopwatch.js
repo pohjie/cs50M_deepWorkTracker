@@ -67,6 +67,25 @@ class StopWatch extends React.Component {
     })
   }
 
+  handleLogging = (mins) => {
+    let today = new Date();
+    let dd = String(today.getDate()).padStart(2, '0');
+    let mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+    let date = dd + "/" + mm
+
+    let newDateArr = [...this.props.dateArr]
+    let newLoggedTimeArr = [...this.props.loggedTimeArr]
+
+    if (newDateArr[newDateArr.length - 1] === date) {
+      newLoggedTimeArr[newLoggedTimeArr.length - 1] += mins
+    } else {
+      newDateArr.push(date)
+      newLoggedTimeArr.push(mins)
+    }
+
+    this.props.addSession({newDateArr: newDateArr, newLoggedTimeArr: newLoggedTimeArr})
+  }
+
   render() {
     return (
       <View style={styles.container}>
@@ -78,27 +97,30 @@ class StopWatch extends React.Component {
           <Text style={styles.title}>{this.state.secs}</Text>
         </View>
         <View style={styles.row}>
-          <Button title="Start" 
-                  onPress={this.onButtonStart} 
-                  accessibilityLabel="Start button"></Button>
-          <Button title="Stop" 
-                  onPress={this.onButtonStop}
-                  accessibilityLabel="Stop button"></Button>
+          <Button title="Start"
+            onPress={this.onButtonStart}
+            accessibilityLabel="Start button"></Button>
+          <Button title="Stop"
+            onPress={this.onButtonStop}
+            accessibilityLabel="Stop button"></Button>
           <Button title="Reset"
-                  onPress={this.onButtonReset}
-                  accessibilityLabel="Reset button"></Button>
+            onPress={this.onButtonReset}
+            accessibilityLabel="Reset button"></Button>
         </View>
         <View style={styles.row}>
           <Button title="Log"
-                  onPress={() => {
-                    const hours = this.state.hours
-                    const mins = this.state.mins
-                    this.onButtonReset
-                    this.props.addSession(Number(hours) * 60 + Number(mins))
-                    this.props.navigation.navigate("Logged",
-                                                    {hours: hours,
-                                                    mins: mins})}}
-                  accessibilityLabel="Log your deep work time"></Button>
+            onPress={() => {
+              const hours = this.state.hours
+              const mins = this.state.mins
+              this.onButtonReset
+              this.handleLogging(Number(hours) * 60 + Number(mins))
+              this.props.navigation.navigate("Logged",
+                {
+                  hours: hours,
+                  mins: mins
+                })
+            }}
+            accessibilityLabel="Log your deep work time"></Button>
         </View>
       </View>
     )
@@ -124,4 +146,9 @@ const styles = StyleSheet.create({
   }
 })
 
-export default connect(null, {addSession: addSession})(StopWatch)
+const MapStateToProps = state => ({
+  dateArr: state.dateArr,
+  loggedTimeArr: state.loggedTimeArr,
+  goal: state.goal,
+})
+export default connect(MapStateToProps, { addSession: addSession })(StopWatch)

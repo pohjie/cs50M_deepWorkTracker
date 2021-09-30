@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 
 class LoggedScreen extends React.Component {
   render() {
-    const day = this.props.day
+    const day = (this.props.loggedTimeArr.length > 0) ? this.props.loggedTimeArr[this.props.loggedTimeArr.length - 1] : 0
     const goal = this.props.goal
 
     const hours = this.props.route.params.hours
@@ -39,6 +39,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   text: {
+    color: 'white',
     textAlign: 'center',
     fontSize: 16,
     marginBottom: 5,
@@ -46,7 +47,7 @@ const styles = StyleSheet.create({
 })
 
 const MapStateToProps = state => ({
-  day: state.day,
+  loggedTimeArr: state.loggedTimeArr,
   goal: state.goal,
 })
 export default connect(MapStateToProps)(LoggedScreen)

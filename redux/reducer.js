@@ -1,12 +1,15 @@
 import { ADD_SESSION } from "./actions";
 
-const initialState = { day: 0, goal: 120, past: 0 }
+const initialState = { goal: 120,
+                       dateArr: [],
+                       loggedTimeArr: [], }
 
 function timeReducer(state = initialState, action) {
   if (action.type === ADD_SESSION) {
     return {
       ...state,
-      day: state.day + action.payload
+      dateArr: action.payload.newDateArr,
+      loggedTimeArr: action.payload.newLoggedTimeArr,
     }
   }
   return state

@@ -1,37 +1,9 @@
 import React from 'react'
-import { StyleSheet, View, Dimensions } from 'react-native'
+import { StyleSheet, View } from 'react-native'
 import { LineChart, ProgressChart } from 'react-native-chart-kit'
 
+import {chartConfig, screenWidth} from '../config'
 import { connect } from 'react-redux'
-
-// prevRecord
-const prevRecord = {
-  labels: ["21/9", "22/9", "23/9", "24/9", "25/9", "26/9"],
-  datasets: [
-    {
-      data: [2, 4.5, 2.8, 5, 3.3, 4.3],
-      color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`, // optional
-      strokeWidth: 2 // optional
-    }
-  ],
-  legend: ["Deep Work Records"], // optional
-};
-
-const chartConfig = {
-  color: (opacity = 1) => `rgba(26, 255, 146, ${opacity})`,
-  strokeWidth: 2, // optional, default 3
-  barPercentage: 0.5,
-  useShadowColorFromDataset: false // optional
-};
-const screenWidth = Dimensions.get("window").width
-
-// progressRing
-// const progress = {
-//   labels: ['Today', 'Week', 'Month'],
-//   data: [this.props.day / this.props.goal,
-//          0.21, 
-//          0.07],
-// }
 
 class RecordScreen extends React.Component {
   state = {
@@ -41,13 +13,24 @@ class RecordScreen extends React.Component {
              0.21, 
              0.07],
     },
+    prevRecord:  {
+      labels: ["21/9", "22/9", "23/9", "24/9", "25/9", "26/9"],
+      datasets: [
+        {
+          data: [2, 4.5, 2.8, 5, 3.3, 4.3],
+          color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`, // optional
+          strokeWidth: 2 // optional
+        }
+      ],
+      legend: ["Deep Work Records"], // optional
+    },
   }
 
   render() {
     return (
       <View style={styles.container}>
         <LineChart
-          data={prevRecord}
+          data={this.state.prevRecord}
           width={screenWidth}
           height={220}
           chartConfig={chartConfig}
