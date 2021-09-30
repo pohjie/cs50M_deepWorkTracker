@@ -2,22 +2,22 @@ import React from 'react'
 import { StyleSheet, View } from 'react-native'
 import { LineChart, ProgressChart } from 'react-native-chart-kit'
 
-import {chartConfig, screenWidth} from '../config'
+import { chartConfig, screenWidth } from '../config'
 import { connect } from 'react-redux'
 
 class RecordScreen extends React.Component {
   state = {
     progress: {
       labels: ['Today', 'Week', 'Month'],
-      data: [this.props.day / this.props.goal,
-             0.21, 
-             0.07],
+      data: [(this.props.loggedTimeArr[this.props.loggedTimeArr.length - 1] || 0) / this.props.goal,
+             (this.props.loggedTimeArr[this.props.loggedTimeArr.length - 1] || 0) / (this.props.goal * 7),
+             (this.props.loggedTimeArr[this.props.loggedTimeArr.length - 1] || 0) / (this.props.goal * 30)],
     },
     prevRecord:  {
-      labels: ["21/9", "22/9", "23/9", "24/9", "25/9", "26/9"],
+      labels: this.props.dateArr,
       datasets: [
         {
-          data: [2, 4.5, 2.8, 5, 3.3, 4.3],
+          data: this.props.loggedTimeArr,
           color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`, // optional
           strokeWidth: 2 // optional
         }
@@ -68,7 +68,8 @@ const styles = StyleSheet.create({
 })
 
 const MapStateToProps = state => ({
-  day: state.day,
+  loggedTimeArr: state.loggedTimeArr,
+  dateArr: state.dateArr,
   goal: state.goal,
 })
 export default connect(MapStateToProps)(RecordScreen)
