@@ -1,7 +1,8 @@
 import React from 'react'
-import { StyleSheet, View, Text, TextInput } from 'react-native'
+import { StyleSheet, View, Button, Text, TextInput } from 'react-native'
 
 import { connect } from 'react-redux'
+import { updateGoal } from '../redux/actions'
 
 class SettingsScreen extends React.Component {
   state = {
@@ -14,10 +15,15 @@ class SettingsScreen extends React.Component {
         <Text style={styles.text}>Input your desired daily deep work goal below:</Text>
         <TextInput
           style={styles.input}
-          onChangeText={() => { }}
+          onChangeText={(goal) => this.setState({goal})}
           value={this.state.goal}
           keyboardType="numeric"
         />
+        <Button
+          // onPress={this.props.updateGoal({mins: Number(this.state.goal)})}
+          onPress={() => {}}
+          title="Update daily goal"
+          accessibilityLabel="Button to update daily deep work goal" />
       </View>
     )
   }
@@ -31,6 +37,7 @@ const styles = StyleSheet.create({
   },
   text: {
     color: 'white',
+    fontSize: 20,
     textAlign: 'center',
   },
   input: {
@@ -46,6 +53,6 @@ const styles = StyleSheet.create({
 })
 
 const MapStateToProps = state => ({
-  goal: state.goal,
+  goal: state.goalReducer,
 })
-export default connect(MapStateToProps)(SettingsScreen)
+export default connect(MapStateToProps, { updateGoal: updateGoal })(SettingsScreen)

@@ -8,9 +8,7 @@ class LoggedScreen extends React.Component {
     const day = (this.props.loggedTimeArr[this.props.loggedTimeArr.length - 1] || 0)
     const goal = (this.props.goal || 0)
 
-    console.log(day)
-    console.log(goal)
-
+    console.log(this.props.goal)
     const hours = this.props.route.params.hours
     const mins = this.props.route.params.mins
 
@@ -51,6 +49,6 @@ const styles = StyleSheet.create({
 
 const MapStateToProps = state => ({
   loggedTimeArr: state.timeReducer.loggedTimeArr,
-  goal: state.goalReducer.goal,
+  goal: state.goalReducer,
 })
 export default connect(MapStateToProps)(LoggedScreen)

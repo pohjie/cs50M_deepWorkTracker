@@ -1,10 +1,6 @@
 import { combineReducers } from "redux";
 import { ADD_SESSION, UPDATE_GOAL } from "./actions";
 
-const initialState = { goal: 120,
-                       dateArr: [],
-                       loggedTimeArr: [], }
-
 function timeReducer(state = {dateArr: [], loggedTimeArr: []}, action) {
   if (action.type === ADD_SESSION) {
     return {
@@ -16,7 +12,7 @@ function timeReducer(state = {dateArr: [], loggedTimeArr: []}, action) {
   return state
 }
 
-function goalReducer(state=120, action) {
+function goalReducer(state = 120, action) {
   if (action.type === UPDATE_GOAL) {
     return {
       ...state,

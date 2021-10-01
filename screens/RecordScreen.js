@@ -27,10 +27,6 @@ class RecordScreen extends React.Component {
   }
 
   render() {
-    console.log(this.props.dateArr)
-    console.log(this.props.loggedTimeArr)
-    console.log(this.props.goal)
-
     return (
       <View style={styles.container}>
         <LineChart
@@ -74,6 +70,6 @@ const styles = StyleSheet.create({
 const MapStateToProps = state => ({
   loggedTimeArr: state.timeReducer.loggedTimeArr,
   dateArr: state.timeReducer.dateArr,
-  goal: state.goalReducer.goal,
+  goal: state.goalReducer,
 })
 export default connect(MapStateToProps)(RecordScreen)
