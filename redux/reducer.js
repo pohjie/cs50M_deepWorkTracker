@@ -12,7 +12,7 @@ function timeReducer(state = {dateArr: [], loggedTimeArr: []}, action) {
   return state
 }
 
-function goalReducer(state = 120, action) {
+function goalReducer(state = {goal: 120}, action) {
   if (action.type === UPDATE_GOAL) {
     return {
       ...state,

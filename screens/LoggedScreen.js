@@ -49,6 +49,6 @@ const styles = StyleSheet.create({
 
 const MapStateToProps = state => ({
   loggedTimeArr: state.timeReducer.loggedTimeArr,
-  goal: state.goalReducer,
+  goal: state.goalReducer.goal,
 })
 export default connect(MapStateToProps)(LoggedScreen)

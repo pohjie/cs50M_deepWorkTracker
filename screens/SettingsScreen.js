@@ -6,7 +6,11 @@ import { updateGoal } from '../redux/actions'
 
 class SettingsScreen extends React.Component {
   state = {
-    goal: this.props.goal.toString()
+    goal: '0',
+  }
+
+  componentDidMount() {
+    this.setState({goal: this.props.goal.toString()})
   }
 
   render() {
@@ -20,8 +24,8 @@ class SettingsScreen extends React.Component {
           keyboardType="numeric"
         />
         <Button
-          // onPress={this.props.updateGoal({mins: Number(this.state.goal)})}
-          onPress={() => {}}
+          onPress={() => this.props.updateGoal(Number(this.state.goal))}
+          //onPress={() => {}}
           title="Update daily goal"
           accessibilityLabel="Button to update daily deep work goal" />
       </View>
@@ -53,6 +57,6 @@ const styles = StyleSheet.create({
 })
 
 const MapStateToProps = state => ({
-  goal: state.goalReducer,
+  goal: state.goalReducer.goal,
 })
 export default connect(MapStateToProps, { updateGoal: updateGoal })(SettingsScreen)

@@ -10,10 +10,10 @@ class RecordScreen extends React.Component {
     progress: {
       labels: ['Today', 'Week', 'Month'],
       data: [(this.props.loggedTimeArr[this.props.loggedTimeArr.length - 1] || 0) / this.props.goal,
-             (this.props.loggedTimeArr[this.props.loggedTimeArr.length - 1] || 0) / (this.props.goal * 7),
-             (this.props.loggedTimeArr[this.props.loggedTimeArr.length - 1] || 0) / (this.props.goal * 30)],
+      (this.props.loggedTimeArr[this.props.loggedTimeArr.length - 1] || 0) / (this.props.goal * 7),
+      (this.props.loggedTimeArr[this.props.loggedTimeArr.length - 1] || 0) / (this.props.goal * 30)],
     },
-    prevRecord:  {
+    prevRecord: {
       labels: this.props.dateArr.slice(-5),
       datasets: [
         {
@@ -24,6 +24,24 @@ class RecordScreen extends React.Component {
       ],
       legend: ["Deep Work Records"], // optional
     },
+  }
+
+  componentDidMount() {
+    this._unsubscribe = this.props.navigation.addListener('focus', () => {
+      this.refreshProgress()
+    });
+  }
+
+  componentWillUnmount() {
+    this._unsubscribe();
+  }
+
+  refreshProgress = () => {
+    let progress = { ...this.state.progress }
+    progress.data = [(this.props.loggedTimeArr[this.props.loggedTimeArr.length - 1] || 0) / this.props.goal,
+    (this.props.loggedTimeArr[this.props.loggedTimeArr.length - 1] || 0) / (this.props.goal * 7),
+    (this.props.loggedTimeArr[this.props.loggedTimeArr.length - 1] || 0) / (this.props.goal * 30)]
+    this.setState({ progress })
   }
 
   render() {
@@ -70,6 +88,6 @@ const styles = StyleSheet.create({
 const MapStateToProps = state => ({
   loggedTimeArr: state.timeReducer.loggedTimeArr,
   dateArr: state.timeReducer.dateArr,
-  goal: state.goalReducer,
+  goal: state.goalReducer.goal,
 })
 export default connect(MapStateToProps)(RecordScreen)
