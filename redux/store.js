@@ -4,14 +4,14 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import thunk from 'redux-thunk'
 
-import { timeReducer } from "./reducer";
+import reducer, { timeReducer } from "./reducer";
 
 const persistConfig = {
   key: 'root',
   storage: AsyncStorage,
 }
 
-const persistedReducer = persistReducer(persistConfig, timeReducer)
+const persistedReducer = persistReducer(persistConfig, reducer)
 
 export const store = configureStore({ 
                       reducer: persistedReducer,

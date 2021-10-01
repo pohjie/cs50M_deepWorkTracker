@@ -14,10 +14,10 @@ class RecordScreen extends React.Component {
              (this.props.loggedTimeArr[this.props.loggedTimeArr.length - 1] || 0) / (this.props.goal * 30)],
     },
     prevRecord:  {
-      labels: this.props.dateArr,
+      labels: this.props.dateArr.slice(-5),
       datasets: [
         {
-          data: this.props.loggedTimeArr,
+          data: this.props.loggedTimeArr.slice(-5),
           color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`, // optional
           strokeWidth: 2 // optional
         }
@@ -27,6 +27,10 @@ class RecordScreen extends React.Component {
   }
 
   render() {
+    console.log(this.props.dateArr)
+    console.log(this.props.loggedTimeArr)
+    console.log(this.props.goal)
+
     return (
       <View style={styles.container}>
         <LineChart
@@ -68,8 +72,8 @@ const styles = StyleSheet.create({
 })
 
 const MapStateToProps = state => ({
-  loggedTimeArr: state.loggedTimeArr,
-  dateArr: state.dateArr,
-  goal: state.goal,
+  loggedTimeArr: state.timeReducer.loggedTimeArr,
+  dateArr: state.timeReducer.dateArr,
+  goal: state.goalReducer.goal,
 })
 export default connect(MapStateToProps)(RecordScreen)

@@ -147,8 +147,8 @@ const styles = StyleSheet.create({
 })
 
 const MapStateToProps = state => ({
-  dateArr: state.dateArr,
-  loggedTimeArr: state.loggedTimeArr,
-  goal: state.goal,
+  dateArr: state.timeReducer.dateArr,
+  loggedTimeArr: state.timeReducer.loggedTimeArr,
+  goal: state.goalReducer.goal,
 })
 export default connect(MapStateToProps, { addSession: addSession })(StopWatch)
